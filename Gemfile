@@ -7,4 +7,5 @@ gem 'maruku',     '=0.6.0'
 gem 'rdiscount',  '=1.6.8'
 gem 'RedCloth',   '=4.2.9'
 gem "rake"
+gem "iconv"
 
