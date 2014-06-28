@@ -38,17 +38,25 @@ yepnope({
         });
       };
       // call openspending api for data
-      new OpenSpending.Aggregator({
-        apiUrl: 'http://openspending.org/api',
-        //Use static file instead of api
-        //localApiCache: 'aggregate.json',
-        dataset: OpenSpending.identifier,
-        rootNodeLabel: 'Total',
-        drilldowns: ['Category', 'Subcategory'],
-        cuts: ['year:' + OpenSpending.year],
-        breakdown: 'Subcategory',
-        callback: dataLoaded
-      });
+      // new OpenSpending.Aggregator({
+      //   apiUrl: 'http://openspending.org/api',
+      //   //Use static file instead of api
+      //   //localApiCache: 'aggregate.json',
+      //   dataset: OpenSpending.identifier,
+      //   rootNodeLabel: 'Total',
+      //   drilldowns: ['Category', 'Subcategory'],
+      //   cuts: ['year:' + OpenSpending.year],
+      //   breakdown: 'Subcategory',
+      //   callback: dataLoaded
+      // });
+$(function(){
+  var el = $('#local-gov-year-select');
+  el.on('load',function(e,data){
+    $('#bubbletree').empty();
+    console.log('hogehoge',data)
+    dataLoaded(data)
+  })
+})
     });
   }
 });

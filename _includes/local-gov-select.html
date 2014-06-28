@@ -1,13 +1,66 @@
-<div>
+<script>
+
+function selectedLocalGovName() {
+  return jQuery('#local-gov :selected').text();
+}
+function selectedDataset(){
+  return $('#local-gov').val();
+}
+function selectedYear(){
+  return $('#select-year').val();
+}
+$(function(){
+  var el = $('#local-gov-year-select');
+  var loadData = function (dataset, year) {
+    $('#content-wrap,.db-tier').hide();
+    $('#preloader').show();
+    new OpenSpending.Aggregator({
+      apiUrl: 'http://openspending.org/api',
+      dataset: dataset,
+      drilldowns: ['Category', 'Subcategory'],
+      cuts: ['year:' + year],
+      rootNodeLabel: 'Total',
+      breakdown: 'Subcategory',
+      callback: function(data) {
+        $('#content-wrap,.db-tier').show();
+        $('#preloader').hide();
+        el.trigger('load', data)
+        console.log('aaa')
+      }
+    });
+  }
+  $('#local-gov, #select-year').change(function () {
+    el.trigger('change');
+    console.log('chng')
+    loadData(selectedDataset(), selectedYear());
+  });
+
+  $('.local-gov-name').text(selectedLocalGovName());
+  try{
+    loadData(selectedDataset(), selectedYear());
+  }catch(e){
+    console.log('load順序なおせ')
+    setTimeout(function(){loadData(selectedDataset(), selectedYear());},1000)
+
+  }
+})
+</script>
+
+<div id='local-gov-year-select'>
   <h2 style="width:240px;display:inline-block;vertical-align:top;">みてみたい自治体は？</h2>
   <select id="local-gov">
-    <optgroup label="八王子市">
-      <option value="hachioji_budget,2013" selected="selected">八王子市 平成 25 年度</option>
-      <option value="hachioji_budget,2012">八王子市 平成 24 年度</option>
-      <option value="hachioji_budget,2011">八王子市 平成 23 年度</option>
+    <optgroup label="市町村を選択">
+      <option value="jp-472018" selected="selected">八王子市</option>
+      <option value="jp-472051">八王子市</option>
+      <option value="jp-472085">糸魚川</option>
     </optgroup>
-    <optgroup label="糸魚川市">
-      <option value="itoigawa_budget_2014,2014">糸魚川市 平成 26 年度</option>
+  </select>
+  <select id="select-year">
+    <optgroup label="年度を選択">
+      <option value="2013">平成 24 年度</option>
+      <option value="2012">平成 23 年度</option>
+      <option value="2011">平成 22 年度</option>
+      <option value="2010">平成 21 年度</option>
     </optgroup>
   </select>
 </div>

@@ -61,7 +61,7 @@ yepnope({
         });
       }
 
-      $('#local-gov').change(function () {
+      $('#local-gov, #select-year').change(function () {
         $('.local-gov-name').text(selectedLocalGovName());
         loadData(selectedDataset(), selectedYear());
       });
