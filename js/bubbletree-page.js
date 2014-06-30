@@ -11,13 +11,18 @@ yepnope({
     '/css/bubbletree.css',
     '/css/cra-map.css',
     '/js/aggregator.js',
-    '/js/setting.js'
+    '/js/setting.js',
+    '/js/dropdown-select-gov-year.js'
   ],
   complete: function() {
     $(function() {
       var $tooltip = $('<div class="tooltip">Tooltip</div>');
       $('.bubbletree').append($tooltip);
       $tooltip.hide();
+
+
+
+
       var dataLoaded = function(data) {
         window.bubbleTree = new BubbleTree({
           data: data,
@@ -36,6 +41,8 @@ yepnope({
             }
           }
         });
+
+
       };
       // call openspending api for data
       // new OpenSpending.Aggregator({
@@ -58,5 +65,7 @@ $(function(){
   })
 })
     });
+
+  jQuery( loadLocalGovList);
   }
 });

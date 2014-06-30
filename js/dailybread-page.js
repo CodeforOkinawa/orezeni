@@ -9,7 +9,8 @@ yepnope({
     '/js/aggregator.js',
     '/css/dailybread.css',
     '/js/setting.js?20120707',
-    '/js/dailybread.js?20120707'
+    '/js/dailybread.js?20120707',
+    '/js/dropdown-select-gov-year.js'
   ],
   complete: function() {
     $('#preloader .txt').html('loading data');
@@ -31,7 +32,7 @@ yepnope({
     }
 
     function selectedYear() {
-      return jQuery('#local-gov').val().split(',')[1];
+      return jQuery('#select-year').val(); //.split(',')[1];
     }
 
     function setup() {
@@ -71,5 +72,6 @@ yepnope({
     }
 
     jQuery(setup);
+    loadLocalGovList();
   }
 });
