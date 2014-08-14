@@ -1,6 +1,8 @@
 //----- code for okinawa
 
 function loadLocalGovList() {
+  console.log("load local gov list");
+
   $.getJSON("js/local-gov-year.js", function(json){
    $('#local-gov').empty();
    $('#local-gov').append('<optgroup label="市町村を選択">');
@@ -17,13 +19,14 @@ function loadLocalGovList() {
 }
 
 function updateYearBox() {
-    $('#select-year').empty();
-    $('#select-year').append('<optgroup label="年度を選択">');
-    years = $('#local-gov').find(':selected').data("years");
-    $.each(years, function(i, year) {
-      $('#select-year').append('<option value="' + year + '">平成' +  (year - 1988) + '年度</option>');
+  console.log("update year box");
+  $('#select-year').empty();
+  $('#select-year').append('<optgroup label="年度を選択">');
+  years = $('#local-gov').find(':selected').data("years");
+  $.each(years, function(i, year) {
+    $('#select-year').append('<option value="' + year + '">平成' +  (year - 1988) + '年度</option>');
 
-    });
+  });
 }
 
 function selectedLocalGovName() {
@@ -35,9 +38,11 @@ function selectedDataset(){
 function selectedYear(){
   return $('#select-year').val();
 }
-$(function(){
+
+
   var el = $('#local-gov-year-select');
   var loadData = function (dataset, year) {
+    console.log("load data" + dataset + "," + year);
 
     $('#content-wrap,.db-tier').hide();
     $('#preloader').show();
@@ -78,6 +83,6 @@ $(function(){
     setTimeout(function(){loadData(selectedDataset(), selectedYear());},1000)
 
   }
-})
+
 
     // ---- code for okinawa
